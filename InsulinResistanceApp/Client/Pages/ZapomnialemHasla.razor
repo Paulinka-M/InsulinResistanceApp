@@ -1,0 +1,119 @@
+﻿@page "/zapomnialem-hasla"
+@inject IAuthService AuthService
+@inject ILocalStorageService LocalStorage
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+<div class="top-bar">
+    <div class="logo">
+        <h1 @onclick="NavigateToHomePage">Insulin Resistance <span style="color:#f4c430">App</span></h1>
+    </div>
+    <div class="login-button">
+        <button class="btn btn-primary" @onclick="NavigateToRegister">Zarejestruj się</button>
+    </div>
+</div>
+<div class="container">
+    <div class="formularz">
+        <h3>
+            Aby odzyskać hasło podaj swój e-mail.  <br />
+            Wyślemy wiadomość z linkiem do odzyskiwania hasła.
+        </h3>
+
+        <Microsoft.AspNetCore.Components.Forms.EditForm Model="uzytkownik" OnValidSubmit="ForgotHandler">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <div class="mb-3">
+                <label for="email">E-mail</label>
+                <InputText id="email" @bind-Value="uzytkownik.Email" class="form-control" />
+                <ValidationMessage For="@(() => uzytkownik.Email)" />
+            </div>
+
+            <button type="submit" class="btn btn-secondary">Potwierdź</button>
+
+        </Microsoft.AspNetCore.Components.Forms.EditForm>
+        <div class="text-danger">
+            <span>@errorMessage</span>
+        </div>
+        <div class="text-success">
+            <span>@successMessage</span>
+        </div>
+    </div>
+    <div>
+        <img class="media-img" src="Images/jogurty.jpg" alt="Obrazek" width="400" height="550">
+    </div>
+    
+</div>
+
+<footer class="footer">
+    <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/facebook-icon.png" alt="Facebook" class="iconfb">
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/youtube-icon.png" alt="YouTube" class="iconyt">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/instagram-icon.png" alt="Instagram" class="iconinsta">
+        </a>
+        <a href="https://www.gmail.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/gmail-icon.png" alt="Gmail" class="icongmail">
+        </a>
+    </div>
+</footer>
+
+
+@code {
+    private ZapomnianeHaslo uzytkownik = new ZapomnianeHaslo();
+    private string errorMessage = string.Empty;
+    private string successMessage = string.Empty;
+
+    private async Task ForgotHandler()
+    {
+        bool isSQL = checkForSqlStatements(uzytkownik.Email);
+        if (isSQL == true)
+        {
+            errorMessage = "Twój email zawiera zapytanie SQL. Niemożliwe, by taki e-mail znajdował się w naszej bazie użytkowników. :(.";
+        }
+        else
+        {
+            var result = await AuthService.ZapomnianeHaslo(uzytkownik);
+            if (result.Success)
+            {
+                errorMessage = string.Empty;
+                successMessage = result.Message;
+            }
+            else
+            {
+                errorMessage = result.Message;
+                successMessage = string.Empty;
+            }
+        }
+    }
+    private bool checkForSqlStatements(string toCheck)
+    {
+        string[] zakazane = new string[13] {"SELECT", "UNION", "DROP", "FROM",
+                    "WHERE", "JOIN", "USE", "GROUP", "ORDER", "'",
+                    "DELETE", "CREATE", "ALTER"};
+
+
+        toCheck = toCheck.ToUpper();
+
+        foreach (string zakazaneSlowo in zakazane)
+        {
+
+            if (toCheck.Contains(zakazaneSlowo))
+            {
+                Console.WriteLine("Znaleziono zakazane slowo: " + zakazaneSlowo);
+                return true;
+            }
+        }
+        return false;
+    }
+    private void NavigateToRegister()
+    {
+        NavigationManager.NavigateTo("/rejestracja");
+    }
+
+    private void NavigateToHomePage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

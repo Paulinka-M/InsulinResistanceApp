@@ -1,0 +1,35 @@
+﻿@inject IProduktService ProduktService
+@implements IDisposable
+
+
+    <ul class="list-unstyled">
+        @foreach (var produkt in ProduktService.Produkty)
+        {
+            <li class="media my-3">
+                <div class="media-body">
+                    <a href="/produkt/@produkt.Id">
+                        <h4 class="mb-0">@produkt.Nazwa</h4>
+                    </a>
+                    <p>Kalorie na 100g: @produkt.kcal</p>
+                    <p>Białko na 100g: @produkt.bialko</p>
+                    <p>Węglowodany na 100g: @produkt.weglowodany</p>
+                    <p>Indeks glikemiczny: @produkt.indeksglikemiczny</p>
+                </div>
+            </li>
+        }
+    </ul>
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        ProduktService.ProduktyChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ProduktService.ProduktyChanged -= StateHasChanged;
+    }
+
+}

@@ -1,0 +1,147 @@
+﻿@page "/kalkulator"
+@inject NavigationManager NavigationManager
+@inject IProduktService ProduktService
+@inject IPosilekService PosilekService
+@inject ISyncLocalStorageService LocalStorage 
+
+<div class="top-bar">
+    <div class="logo">
+        <h1 @onclick="NavigateToHomePage">Insulin Resistance <span style="color:#f4c430">App</span></h1>
+    </div>
+    <div class="login-button">
+        <button class="btn btn-primary" @onclick="NavigateToProfile" style="font-size: 20px;" width="30px;" height="25px;"><span class="oi oi-person"></span></button>
+    </div>
+</div>
+
+<div class="sidebar">
+    <button @onclick="NavigateToHomePage"><span class="oi oi-home" style="color: #f4c430; font-size: 1.5em;"></span>    Strona główna</button>
+    <button @onclick="NavigateToCalculator"><span class="oi oi-calculator" style="color: #f4c430; font-size: 1.5em;"></span>    Szybki kalkulator</button>
+    <button @onclick="NavigateToCalendar"><span class="oi oi-calendar" style="color: #f4c430; font-size: 1.5em;"></span>    Mój kalendarz</button>
+    <button @onclick="NavigateToProducts"><span class="oi oi-list-rich" style="color: #f4c430; font-size: 1.5em;"></span>   Lista produktów</button>
+    <button @onclick="NavigateToKnowledgeBase"><span class="oi oi-book" style="color: #f4c430; font-size: 1.5em;"></span>   Baza wiedzy</button>
+</div>
+<div class="content">
+    <h1 style="color: #f4c430;">Kalkulator kalorii i ładunku glikemicznego w posiłku</h1><br /><br />
+    <input @bind="WyszukiwanyProdukt" style="height: 30px"  placeholder="Wyszukaj produkt..." @oninput="SzukajProduktu" />
+    <select @bind="WybranyProdukt" style="height: 30px" @oninput="SzukajProduktu">
+    <option value="">Wybierz produkt</option>
+        @foreach (var produkt in ProduktService.Produkty)
+        {
+            <option value="@produkt.Id">@produkt.Nazwa</option>
+        }
+    </select>
+
+    <br /><br /><br />
+
+    <input @bind="IloscGram" style="height: 30px" type="number" placeholder="Podaj wagę produktu w gramach" /> gram
+
+    <br /><br /><br />
+
+    <button class="btn btn-primary" @onclick="DodajDoPosilku">Dodaj produkt</button><br /><br />
+
+    <h2 style="color: #f4c430;">Dodano (@produktyWPosilku.Count) produktów. Łącznie wprowadzony posiłek zawiera:</h2><br /><br />
+    <div class="podsumowanie">
+        Kalorie: @produktyWPosilku.Sum(produkt => @produkt.kcal * produkt.waga / 100) <br />
+        Białko: @produktyWPosilku.Sum(produkt => @produkt.bialko * produkt.waga / 100)g <br />
+        Węglowodany: @produktyWPosilku.Sum(produkt => @produkt.weglowodany * produkt.waga / 100)g <br />
+        Tłuszcze: @produktyWPosilku.Sum(produkt => @produkt.tluszcze * produkt.waga / 100)g <br />
+        Ładunek Glikemiczny: @produktyWPosilku.Sum(produkt => @produkt.weglowodany / 100 * produkt.indeksglikemiczny * produkt.waga / 100) <br />
+    </div>
+
+
+</div>
+
+<footer class="footer">
+    <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/facebook-icon.png" alt="Facebook" class="iconfb">
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/youtube-icon.png" alt="YouTube" class="iconyt">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/instagram-icon.png" alt="Instagram" class="iconinsta">
+        </a>
+        <a href="https://www.gmail.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/gmail-icon.png" alt="Gmail" class="icongmail">
+        </a>
+    </div>
+</footer>
+
+@code {
+    private int IloscGram { get; set; }
+    private int WybranyProdukt { get; set; }
+    private string WyszukiwanyProdukt { get; set; }
+
+    List<ProduktWPosilkuResponse> produktyWPosilku = null;
+    string message = "wczytywanie. . .";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if ((await PosilekService.GetProduktyWPosilku()).Count == 0)
+        {
+            message = "Brak produktów dodanych do posiłku";
+            produktyWPosilku = new List<ProduktWPosilkuResponse>();
+        }
+        else
+        {
+            produktyWPosilku = await PosilekService.GetProduktyWPosilkuResponse();
+        }
+
+    }
+    
+    private void SzukajProduktu()
+    {
+        if (!string.IsNullOrEmpty(WyszukiwanyProdukt))
+        {
+            ProduktService.SearchProdukt(WyszukiwanyProdukt, 1);
+        }
+        else
+        {
+            ProduktService.GetProdukty(string.Empty);
+        }
+    }
+
+
+    private async Task DodajDoPosilku()
+    {
+        var produktWPosilku = new ProduktWPosilku
+            {
+                ProduktId = WybranyProdukt,
+                Waga = IloscGram
+            };
+
+        await PosilekService.DodajDoPosilku(produktWPosilku);
+    }
+
+    private void NavigateToHomePage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void NavigateToCalculator()
+    {
+        NavigationManager.NavigateTo("/kalkulator");
+    }
+
+    private void NavigateToCalendar()
+    {
+        NavigationManager.NavigateTo("/kalendarz");
+    }
+
+    private void NavigateToProducts()
+    {
+        NavigationManager.NavigateTo("/produkty");
+    }
+    
+    private void NavigateToProfile()
+    {
+        NavigationManager.NavigateTo("/profil");
+    }
+
+    private void NavigateToKnowledgeBase()
+    {
+        NavigationManager.NavigateTo("/baza-wiedzy");
+    }
+}

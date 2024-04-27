@@ -1,0 +1,147 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #333333;
+}
+
+.logo h1 {
+    font-size: 28px;
+    color: #cccccc;
+}
+
+    .logo h1 a {
+        text-decoration: none;
+        color: #00ff00;
+        transition: color 0.3s ease;
+    }
+
+        .logo h1 a:hover {
+            color: #00cc00;
+        }
+
+.btn.btn-primary {
+    padding: 12px 24px;
+    background-color: #f4c430;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+}
+
+    .btn.btn-primary:hover {
+        background-color: #f4c430;
+        transform: scale(1.05);
+    }
+.sidebar {
+    background-color: #1f1f1f;
+    height: max-content;
+    width: 230px;
+    float: left; 
+    padding: 30px;
+
+}
+
+    .sidebar button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background-color: transparent;
+        color: white;
+        text-align: left;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 200;
+    }
+
+        .sidebar button:hover {
+            background-color: #555;
+        }
+
+.content {
+    background-color: #121212;
+    margin-left: 300px;
+    padding: 20px;
+}
+
+.login-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+.bar-item {
+    flex: 1;
+    text-align: center;
+    color: #f4c430;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+    .social-icons a {
+        margin: 0 15px;
+    }
+
+.iconfb {
+    width: 25px;
+    height: 25px;
+    margin-left: 25px;
+    padding: 0px;
+}
+
+.iconyt {
+    width: 30px;
+    height: 23px;
+    margin-left: 25px;
+    padding: 0px;
+}
+
+.icongmail {
+    width: 48px;
+    height: 25px;
+    margin-left: 25px;
+    padding: 0px;
+}
+
+.iconinsta {
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
+    padding: 0px;
+}

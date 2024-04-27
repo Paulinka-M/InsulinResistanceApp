@@ -1,0 +1,213 @@
+﻿body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0; /* Resetting default margin */
+    padding: 0; /* Resetting default padding */
+    height: 100vh; /* Setting the height to full viewport height */
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #333333;
+}
+
+.logo h1 {
+    font-size: 28px;
+    color: #cccccc;
+}
+
+    .logo h1 a {
+        text-decoration: none;
+        color: #00ff00;
+        transition: color 0.3s ease;
+    }
+
+        .logo h1 a:hover {
+            color: #00cc00;
+        }
+
+.btn.btn-primary {
+    padding: 12px 24px;
+    background-color: #f4c430;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+}
+
+    .btn.btn-primary:hover {
+        background-color: #f4c430;
+        transform: scale(1.05);
+    }
+
+.register-button {
+    padding: 18px 16px;
+    background-color: #f4c430;
+    color: #000f;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Zmieniono szerokość na 100% */
+    margin: 10px 0 0 -15px;
+    outline: none;
+}
+
+    .register-button:hover {
+        background-color: #f4c430;
+        transform: scale(1.05);
+        color: #000f;
+        font-weight: bold;
+    }
+
+.register-container {
+    padding: 18px 16px;
+    color: #cccccc;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Zmieniono szerokość na 100% */
+    margin: 10px 0;
+    outline: none;
+}
+
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 48px;
+    background-color: #1f1f1f;
+    margin: auto;
+}
+
+    .container h1 {
+        font-size: 40px;
+        margin-bottom: 24px;
+        color: #cccccc;
+    }
+
+    .container h2 {
+        font-size: 24px;
+        line-height: 1.5;
+        color: #cccccc;
+    }
+
+.media-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+hr {
+    border-top: 3px solid #ff4500;
+    margin: 32px 0;
+}
+
+.faq {
+
+    margin-top: 60px;
+    padding: 48px;
+    font-size: 18px;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .faq h4 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 32px;
+        margin-bottom: 24px;
+        color: #fff;
+    }
+
+    .faq p {
+        margin-bottom: 24px;
+        color: #cccccc;
+    }
+
+.faq-item:not(:last-child) {
+    margin-bottom: 32px;
+}
+
+.bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #303030;
+    position: absolute;
+    left: 0px;
+    padding: 5px;
+    margin: auto;
+    
+
+}
+
+.bar-item {
+    flex: 1;
+    text-align: center;
+    color: #f4c430;
+    font-weight: bold;
+    font-size: 22px;
+}
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+    .social-icons a {
+        margin: 0 15px;
+    }
+
+.iconfb {
+    width: 25px;
+    height: 25px;
+    margin-left: 25px;
+    padding: 0px;
+}
+
+.iconyt {
+    width: 30px;
+    height: 23px;
+    margin-left: 25px;
+    padding: 0px;
+}
+
+.icongmail {
+    width: 48px;
+    height: 25px;
+    margin-left: 25px;
+    padding: 0px;
+}
+
+.iconinsta {
+    width: 30px;
+    height: 30px;
+    margin-left: 25px;
+    padding: 0px;
+}

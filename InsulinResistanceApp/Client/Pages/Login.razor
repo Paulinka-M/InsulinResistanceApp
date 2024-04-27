@@ -1,0 +1,125 @@
+﻿@page "/logowanie"
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ILocalStorageService LocalStorage
+
+<PageTitle>Logowanie</PageTitle>
+
+<div class="top-bar">
+    <div class="logo">
+        <h1 @onclick="NavigateToHomePage">Insulin Resistance <span style="color:#f4c430">App</span></h1>
+    </div>
+    <div class="login-button">
+        <button class="btn btn-primary" @onclick="NavigateToRegister">Zarejestruj się</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="formularz">
+        <h3 style="color:#f4c430">Logowanie</h3>
+        <Microsoft.AspNetCore.Components.Forms.EditForm Model="uzytkownik" OnValidSubmit="LoginHandler">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <div class="mb-3">
+                <label for="email">E-mail</label>
+                <InputText id="email" @bind-Value="uzytkownik.Email" class="form-control" />
+                <ValidationMessage For="@(() => uzytkownik.Email)" />
+            </div>
+            <div class="mb-3">
+                <label for="haslo">Hasło</label>
+                <InputText id="haslo" @bind-Value="uzytkownik.Haslo" class="form-control" type="password" />
+                <ValidationMessage For="@(() => uzytkownik.Haslo)" />
+            </div>
+
+            <button type="submit" class="btn btn-secondary">Zaloguj się</button>
+
+        </Microsoft.AspNetCore.Components.Forms.EditForm>
+
+        <div class="text-danger">
+            <span>@errorMessage</span>
+        </div>
+        <br />
+        <NavLink href="/zapomnialem-hasla">Zapomniałem Hasła</NavLink>
+    </div>
+    <div>
+        <img class="media-img" src="Images/owoce.jpg" alt="Obrazek" width="400" height="650">
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/facebook-icon.png" alt="Facebook" class="iconfb">
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/youtube-icon.png" alt="YouTube" class="iconyt">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/instagram-icon.png" alt="Instagram" class="iconinsta">
+        </a>
+        <a href="https://www.gmail.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/gmail-icon.png" alt="Gmail" class="icongmail">
+        </a>
+    </div>
+</footer>
+
+@code {
+    private LogowanieUzytkownika uzytkownik = new LogowanieUzytkownika();
+
+    private string errorMessage = string.Empty;
+
+    private async Task LoginHandler()
+    {
+        bool isSQL = checkForSqlStatements(uzytkownik.Email);
+        if (isSQL == true)
+        {
+            errorMessage = "Twój email zawiera zapytanie SQL. Niemożliwe, by taki e-mail znajdował się w naszej bazie użytkowników. :(.";
+        }
+        else
+        {
+            var result = await AuthService.Logowanie(uzytkownik);
+            if (result.Success)
+            {
+                errorMessage = string.Empty;
+                await LocalStorage.SetItemAsync("authToken", result.Data);
+                await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                NavigationManager.NavigateTo("/landing");
+            }
+            else
+            {
+                errorMessage = result.Message;
+            }
+        }
+    }
+
+    private bool checkForSqlStatements(string toCheck)
+    {
+        string[] zakazane = new string[13] {"SELECT", "UNION", "DROP", "FROM",
+                    "WHERE", "JOIN", "USE", "GROUP", "ORDER", "'",
+                    "DELETE", "CREATE", "ALTER"};
+
+
+        toCheck = toCheck.ToUpper();
+
+        foreach (string zakazaneSlowo in zakazane)
+        {
+
+            if (toCheck.Contains(zakazaneSlowo))
+            {
+                Console.WriteLine("Znaleziono zakazane slowo: " + zakazaneSlowo);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void NavigateToRegister()
+    {
+        NavigationManager.NavigateTo("/rejestracja");
+    }
+
+    private void NavigateToHomePage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

@@ -1,0 +1,108 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+<PageTitle>Index</PageTitle>
+
+
+@using System
+
+<div class="top-bar">
+    <div class="logo">
+        <h1 @onclick="NavigateToHomePage">Insulin Resistance <span style="color:#f4c430" >App</span></h1>
+    </div>
+    <div class="login-button">
+        <button class="btn btn-primary" @onclick="NavigateToLogin">Zaloguj się</button>
+    </div>
+</div>
+
+<div class="container">
+    <div>
+        <h1>Niezbędnik osób z insulinoopornością!</h1>
+        <p>Dołącz do naszej społeczności dla osób z insulinoopornością. Dzięki naszej aplikacji zyskasz wsparcie, zdrowe nawyki żywieniowe i zadbasz o aktywność fizyczną.<br /> Oferujemy dostęp do zbilansowanych przepisów, setki produktów wraz z ich makroskładnikami i dostęp do rzetelnych informacji.</p>
+        <div class="register-container">
+            <button class="register-button" @onclick="NavigateToRegistration">Zarejestruj się już teraz</button>
+        </div>
+    </div>
+    <div>
+        <img class="media-img" src="Images/first-page-img.jpg" alt="Obrazek" width="800" height="600">
+    </div>
+</div>
+<div class="bar" style="display: flex; width: 100%; margin-top: 20px;">
+    <div class="bar-item" style="flex: 1; text-align: center;">
+        <span style="font-size: 32px;">56</span><br />
+        <span style="font-size: 16px;">Użytkowników</span>
+    </div>
+    <div class="bar-item" style="flex: 1; text-align: center;">
+         <span style="font-size: 32px;">91</span><br />
+        <span style="font-size: 16px;">Przepisów</span>
+    </div>
+    <div class="bar-item" style="flex: 1; text-align: center;">
+        <span style="font-size: 32px;">312</span><br />
+        <span style="font-size: 16px;">Produktów</span>
+    </div>
+</div>
+<div class="faq" style="margin-left: 48px; width: calc(100% - 96px);">
+    <div class="faq-item">
+        <h4>Czy korzystanie z aplikacji jest płatne?</h4>
+        <p>Nie! Wszystkie dostępne funkcje są bezpłatne i dostępne po zarejestrowaniu.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>Czy mam insulinooporność?</h4>
+        <p>Insulinooporność jest stanem, w którym organizm nie reaguje prawidłowo na insulinę, co prowadzi do zwiększonego poziomu cukru we krwi. Innymi objawami mogą być przewlekłe zmęczenie, trudności w utracie wagi czy zaburzenia lipidowe. Jeśli masz podejrzenia dotyczące insulinooporności, zalecamy skonsultowanie się z lekarzem. Diagnostyka opiera się na badaniach krwi i wywiadzie lekarskim. Wczesne rozpoznanie i leczenie są kluczowe i zapobiegają poważniejszym powikłaniom zdrowotnym.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>Jaka dieta jest odpowiednia dla osób z insulinoopornością?</h4>
+        <p>Dieta dla osób z insulinoopornością powinna charakteryzować się niską zawartością węglowodanów, innymi słowy, spożywane produkty powinny posiadać niski indeks glikemiczny. Cierpiąc na insulinooporność zrezygnuj z białego pieczywa, zamiast arbuza postaw na truskawki, a ziemniaki zastąp kaszą jęczmienną. Więcej informacji na ten temat oraz zestawienie produktów znajdziesz w naszej bazie wiedzy. Pamiętaj jednak o konsultacji z lekarzem i dietetykiem, które nie mogą zostać zastąpione przez porady znalezione w sieci.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>Jakie są objawy insulinooporności?</h4>
+        <p>Objawy insulinooporności mogą obejmować zwiększony poziom cukru we krwi, trudności w utracie wagi, przewlekłe zmęczenie, zaburzenia lipidowe, nadciśnienie tętnicze czy problemy z koncentracją. Warto pamiętać, że objawy te mogą być podobne do innych schorzeń, dlatego ważna jest konsultacja z lekarzem w celu prawidłowej diagnozy i leczenia.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>Czy insulinooporność można leczyć?</h4>
+        <p>Tak, insulinooporność można leczyć. Leczenie opiera się na zmianie stylu życia, w tym na zdrowej diecie, regularnej aktywności fizycznej i utracie wagi. W niektórych przypadkach mogą być stosowane również leki zmniejszające insulinowrażliwość. Ważne jest regularne monitorowanie poziomu cukru we krwi i konsultacje z lekarzem.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>Jakie są korzyści z zarejestrowania się w aplikacji?</h4>
+        <p>Zarejestrowanie się w naszej aplikacji pozwoli Ci skorzystać z wielu funkcji pomocnych w zarządzaniu insulinoopornością. Będziesz miał dostęp do spersonalizowanych planów żywieniowych, wsparcia społeczności oraz narzędzi do monitorowania poziomu cukru i aktywności fizycznej. Wszystko to w jednym miejscu, dostosowane do Twoich indywidualnych potrzeb!</p>
+    </div>
+</div>
+<footer class="footer">
+    <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/facebook-icon.png" alt="Facebook" class="iconfb">
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/youtube-icon.png" alt="YouTube" class="iconyt">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/instagram-icon.png" alt="Instagram" class="iconinsta">
+        </a>
+        <a href="https://www.gmail.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/gmail-icon.png" alt="Gmail" class="icongmail">
+        </a>
+    </div>
+</footer>
+
+
+
+
+@code {
+    private void NavigateToLogin()
+    {
+        NavigationManager.NavigateTo("/logowanie");
+    }
+    
+    private void NavigateToHomePage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+    private void NavigateToRegistration()
+    {
+        NavigationManager.NavigateTo("/rejestracja");
+    }
+}

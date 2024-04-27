@@ -1,0 +1,190 @@
+﻿@page "/produkty"
+@inject NavigationManager NavigationManager
+@inject IKategoriaService KategoriaService
+
+<div class="top-bar">
+    <div class="logo">
+        <h1 @onclick="NavigateToHomePage">Insulin Resistance <span style="color:#f4c430">App</span></h1>
+    </div>
+    <div class="login-button">
+        <button class="btn btn-primary" @onclick="NavigateToProfile" style="font-size: 16px;" width="26px;" height="20px;"><span class="oi oi-person"></span></button>
+    </div>
+</div>
+
+<div class="sidebar">
+    <button @onclick="NavigateToHomePage"><span class="oi oi-home" style="color: #f4c430; font-size: 1.5em;"></span>    Strona główna</button>
+    <button @onclick="NavigateToCalculator"><span class="oi oi-calculator" style="color: #f4c430; font-size: 1.5em;"></span>    Szybki kalkulator</button>
+    <button @onclick="NavigateToCalendar"><span class="oi oi-calendar" style="color: #f4c430; font-size: 1.5em;"></span>    Mój kalendarz</button>
+    <button @onclick="NavigateToProducts"><span class="oi oi-list-rich" style="color: #f4c430; font-size: 1.5em;"></span>   Lista produktów</button>
+    <button @onclick="NavigateToKnowledgeBase"><span class="oi oi-book" style="color: #f4c430; font-size: 1.5em;"></span>   Baza wiedzy</button>
+</div>
+
+
+<div class="content">
+    <!-- Pierwszy rząd -->
+    <div class="row">
+        <!-- Owoce -->
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 1))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 1);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat1.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+        <!-- Warzywa -->
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 4))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 4);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat4.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+        <!-- Nabiał -->
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 7))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 7);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat7.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+    </div>
+
+    <!-- Drugi rząd -->
+    <div class="row">
+        <!-- Mieso -->
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 2))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 2);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat2.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+        <!-- Ryby -->
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 5))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 5);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat5.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+        <!-- Produkty zbożowe -->
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 8))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 8);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat8.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+    </div>
+
+    <!-- Trzeci rząd -->
+    <div class="row">
+
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 3))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 3);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat3.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 6))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 6);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat6.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+        <div class="column">
+            @if (KategoriaService.Kategoria.Any(k => k.Id == 9))
+            {
+                var kategoria = KategoriaService.Kategoria.First(k => k.Id == 9);
+                <NavLink class="nav-link" style="color: #cccccc;" href="@kategoria.Nazwa">
+                    <h2>@kategoria.Nazwa</h2>
+                </NavLink>
+                <img class="media-img" src="Images/kat9.jpg" alt="Obrazek" width="270" height="190">
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/facebook-icon.png" alt="Facebook" class="iconfb">
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/youtube-icon.png" alt="YouTube" class="iconyt">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/instagram-icon.png" alt="Instagram" class="iconinsta">
+        </a>
+        <a href="https://www.gmail.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images/gmail-icon.png" alt="Gmail" class="icongmail">
+        </a>
+    </div>
+</footer>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await KategoriaService.GetKategorie();
+    }
+    
+    private void NavigateToHomePage()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void NavigateToCalculator()
+    {
+        NavigationManager.NavigateTo("/kalkulator");
+    }
+
+    private void NavigateToCalendar()
+    {
+        NavigationManager.NavigateTo("/kalendarz");
+    }
+
+    private void NavigateToProducts()
+    {
+        NavigationManager.NavigateTo("/produkty");
+    }
+    
+    private void NavigateToProfile()
+    {
+        NavigationManager.NavigateTo("/profil");
+    }
+
+    private void NavigateToKnowledgeBase()
+    {
+        NavigationManager.NavigateTo("/baza-wiedzy");
+    }
+}
